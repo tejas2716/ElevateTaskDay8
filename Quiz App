@@ -1,0 +1,78 @@
+package com.elevate_Internship_Day_8;
+
+import java.util.*;
+
+public class QuizApp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Question> quiz = new ArrayList<>();
+
+        // Step 1: Add quiz questions
+        quiz.add(new Question("Which keyword is used to define a class in Java?",
+                new String[]{"A. class", "B. def", "C. struct", "D. object"}, 'A'));
+
+        quiz.add(new Question("Which of the following is not a primitive data type?",
+                new String[]{"A. int", "B. boolean", "C. String", "D. float"}, 'C'));
+
+        quiz.add(new Question("What is the size of an int variable in Java?",
+                new String[]{"A. 2 bytes", "B. 4 bytes", "C. 8 bytes", "D. 1 byte"}, 'B'));
+
+        quiz.add(new Question("Which loop checks the condition after executing once?",
+                new String[]{"A. for", "B. while", "C. do-while", "D. foreach"}, 'C'));
+
+        quiz.add(new Question("What is JVM short for?",
+                new String[]{"A. Java Virtual Machine", "B. Java Very Much", "C. Just Virtual Machine", "D. Java Variable Method"}, 'A'));
+
+        int score = 0;
+
+        // Step 2: Ask each question
+        for (int i = 0; i < quiz.size(); i++) {
+            Question q = quiz.get(i);
+            System.out.println("\nQuestion " + (i + 1) + ": " + q.getQuestion());
+            for (String option : q.getOptions()) {
+                System.out.println(option);
+            }
+
+            System.out.print("Your Answer (A/B/C/D): ");
+            char userAnswer = scanner.next().toUpperCase().charAt(0);
+
+            if (userAnswer == q.getCorrectAnswer()) {
+                System.out.println("Correct!");
+                score++;
+            } else {
+                System.out.println("Wrong! Correct Answer: " + q.getCorrectAnswer());
+            }
+        }
+
+        // Step 3: Show result
+        System.out.println("\n===============================");
+        System.out.println("Quiz Completed!");
+        System.out.println("Your Score: " + score + "/" + quiz.size());
+        System.out.println("Percentage: " + ((score * 100) / quiz.size()) + "%");
+        System.out.println("===============================\n");
+    }
+}
+
+class Question {
+    private String question;
+    private String[] options;
+    private char correctAnswer;
+
+    public Question(String question, String[] options, char correctAnswer) {
+        this.question = question;
+        this.options = options;
+        this.correctAnswer = correctAnswer;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public String[] getOptions() {
+        return options;
+    }
+
+    public char getCorrectAnswer() {
+        return correctAnswer;
+    }
+}
